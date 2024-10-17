@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
 import { movieService } from '../../service/movieService';
+import { Carousel } from 'antd';
 
 export default function CarouselMoive() {
-  const settings = {
-    autoplay: true,
-    infinite: true,
-    speed: 700,
-    autoplaySpeed: 2000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    cssEase: 'ease-in-out',
-  };
   let renderCarousel = () => {
     return carousel?.map((item) => {
-      console.log(item, 'hi');
       return (
         <div key={item.maBanner}>
           <img
@@ -42,7 +31,9 @@ export default function CarouselMoive() {
   }, []);
   return (
     <div className="">
-      <Slider {...settings}>{renderCarousel()}</Slider>
+      <Carousel dots={false} autoplaySpeed={1500} autoplay>
+        {renderCarousel()}
+      </Carousel>
     </div>
   );
 }
