@@ -2,16 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+body {
+  background-color: rgb(20,20,20);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+
+a {
+  color: white !important;
+}
+#LoginPage {
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/f272782d-cf96-4988-a675-6db2afd165e0/web/VN-vi-20241008-TRIFECTA-perspective_c29be0e2-f079-4da0-8b1e-e638e63181d5_medium.jpg');
+  background-size: cover;
+
+  height: 800px;
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt 50% */
+}
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+:where(.css-dev-only-do-not-override-1hpnbz2).ant-dropdown .ant-dropdown-menu, :where(.css-dev-only-do-not-override-1hpnbz2).ant-dropdown-menu-submenu .ant-dropdown-menu
+{
+  background-color: black;
+}
