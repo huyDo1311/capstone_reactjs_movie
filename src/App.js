@@ -4,8 +4,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './page/template/Layout';
 import HomePage from './page/HomePage/HomePage';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
 import LoginPage from './page/LoginPage/LoginPage';
 
 function App() {
