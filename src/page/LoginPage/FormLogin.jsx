@@ -20,14 +20,17 @@ export default function FormLogin() {
         message.success('Login success');
 
         dispatch(setUserAction(result.data.content));
-
+        console.log(result, 'admin');
         let dataJson = JSON.stringify(result.data.content);
 
         localStorage.setItem('USER_LOGIN', dataJson);
-        setTimeout(() => {
-          navigate('/home');
-          window.location.reload();
-        }, 1000);
+        if (result.data.content.maLoaiNguoiDung == 'QuanTri') {
+          navigate('/admin');
+        } else {
+          setTimeout(() => {
+            navigate('/home');
+          }, 1000);
+        }
       })
       .catch((err) => {
         message.info('Login fail');

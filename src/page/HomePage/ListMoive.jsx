@@ -21,7 +21,7 @@ export default function ListMovie() {
     navigate(`/detail/${maPhim}`);
   };
   let renderMovies = () => {
-    return movies?.map((item) => {
+    return movies?.slice(0, 18).map((item) => {
       return (
         <div key={item.maPhim} className="relative group">
           <Card
@@ -57,7 +57,7 @@ export default function ListMovie() {
 
   return (
     <div className="px-5">
-      <p className="text-lg py-2">Các phim chiếu rạp đang hot</p>
+      <p className="text-lg py-2 mb-3">Các phim chiếu rạp đang hot</p>
       <div className="grid grid-cols-6 gap-2 relative">{renderMovies()}</div>
     </div>
   );

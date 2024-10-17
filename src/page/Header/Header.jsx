@@ -69,7 +69,7 @@ export default function Header() {
                       src="https://occ-0-58-395.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABeuqjuQsRgqEDlibtJTI5BMf8IxhLlLOeIT6xI4TL57mqv7XHja43gx02S8pZVe8JNGRQXjnrUk1VcsTXqi83tFKPI6OR3k.png?r=bd7"
                       alt=""
                     />
-                    <i class="fa fa-sort-down  text-white text-sm w-5 text-center group-hover:rotate-180 transition duration-300"></i>
+                    <i class="fa fa-sort-down  text-white text-sm w-5 text-center group-hover:rotate-180 transition duration-500"></i>
                   </div>
                 </Dropdown>
               </Space>

@@ -40,7 +40,7 @@ export default function DetailMovie() {
             <span className="text-red-600 text-sm"> Mô tả </span>:{' '}
             {detailMovies?.moTa}
           </p>
-          <div>
+          <div className="my-3">
             {' '}
             <span className="text-sm text-red-500">Lịch chiếu : </span>
             <span className="text-sm text-white">
@@ -53,6 +53,7 @@ export default function DetailMovie() {
             <span className="text-sm text-red-500">Trailer : </span>
 
             <a
+              target="_blank"
               href={detailMovies?.trailer}
               className="ms-3 hover:scale-125 transition "
             >
