@@ -53,8 +53,8 @@ export default function DetailMovie() {
             <span className="text-sm text-red-500">Trailer : </span>
 
             <a
-              href={detailMovies.trailer}
-              className="ms-3 hover:scale-125 transition"
+              href={detailMovies?.trailer}
+              className="ms-3 hover:scale-125 transition "
             >
               <i class="fa fa-play text-red-500 text-2xl "></i>
             </a>
