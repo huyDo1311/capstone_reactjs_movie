@@ -14,6 +14,7 @@ a {
 #LoginPage {
   background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/f272782d-cf96-4988-a675-6db2afd165e0/web/VN-vi-20241008-TRIFECTA-perspective_c29be0e2-f079-4da0-8b1e-e638e63181d5_medium.jpg');
   background-size: cover;
+  
 
   height: 800px;
   position: relative;
@@ -34,4 +35,8 @@ a {
 :where(.css-dev-only-do-not-override-1hpnbz2).ant-dropdown .ant-dropdown-menu, :where(.css-dev-only-do-not-override-1hpnbz2).ant-dropdown-menu-submenu .ant-dropdown-menu
 {
   background-color: black;
+}
+
+p {
+  color: white;
 }

@@ -6,6 +6,7 @@ import Layout from './page/template/Layout';
 import HomePage from './page/HomePage/HomePage';
 
 import LoginPage from './page/LoginPage/LoginPage';
+import DetailMovie from './page/HomePage/DetailMovie';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/detail/:id" element={<DetailMovie />} />
       </Routes>
     </BrowserRouter>
   );
