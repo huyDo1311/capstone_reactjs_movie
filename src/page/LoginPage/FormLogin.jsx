@@ -15,7 +15,7 @@ export default function FormLogin() {
     http
       .post("/api/QuanLyNguoiDung/DangNhap", values)
       .then((result) => {
-        // console.log("result", result.data.content);
+        console.log("result", result.data.content);
 
         message.success("Login success");
 
