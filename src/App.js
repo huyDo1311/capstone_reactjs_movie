@@ -4,7 +4,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './page/template/Layout';
 import HomePage from './page/HomePage/HomePage';
-
 import LoginPage from './page/LoginPage/LoginPage';
 import DetailMovie from './page/HomePage/DetailMovie';
 import AdminListUser from './page/Admin/AdminListUser';

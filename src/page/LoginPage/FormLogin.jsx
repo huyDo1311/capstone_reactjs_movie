@@ -65,8 +65,8 @@ export default function FormLogin() {
             }}
             initialValues={{
               // remember: true,
-              taiKhoan: 'admin1123',
-              matKhau: '123321',
+              taiKhoan: 'nhiNguvl',
+              matKhau: '123',
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

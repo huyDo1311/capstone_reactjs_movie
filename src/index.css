@@ -40,3 +40,10 @@ a {
 p {
   color: white;
 }
+
+.modal-video {
+  width: 100;
+}
+.modal-video-movie-wrap {
+  width: 10000px;
+}
