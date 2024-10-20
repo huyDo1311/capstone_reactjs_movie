@@ -31,11 +31,7 @@ export default function CarouselMoive() {
       );
     });
   };
-  const trailer = [
-    "uqJ9u7GSaYM?si=ZUDjtxZloXFm9Rhw",
-    "Zw9lINmT-zc?si=xV5PZqGlUcbO41hG",
-    "Eu9G8nO5-Ug?si=aYNp48sRGyLmJLb6",
-  ];
+  const trailer = ["uqJ9u7GSaYM", "Zw9lINmT-zc", "Eu9G8nO5-Ug"];
   let clickToTurnOn = (idTrailer) => {
     setIsDisPlay(true);
     setModal(idTrailer);
@@ -68,19 +64,16 @@ export default function CarouselMoive() {
         <Carousel arrows dots={false} autoplaySpeed={1500} autoplay>
           {renderCarousel()}
         </Carousel>
-        <div className="">
-          <ModalVideo
-            modalVideoClose
-            autoplay
-            isOpen={isDisPlay}
-            onClose={() => {
-              setIsDisPlay(false);
-            }}
-            channel="youtube"
-            videoId={modal}
-            title="YouTube video player"
-          />
-        </div>
+        <ModalVideo
+          modalVideoClose
+          isOpen={isDisPlay}
+          onClose={() => {
+            setIsDisPlay(false);
+          }}
+          channel="youtube"
+          videoId={modal}
+          autoplay
+        />
       </div>
     </div>
   );

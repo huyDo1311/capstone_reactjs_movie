@@ -1,7 +1,7 @@
-import { Button, Dropdown, Space } from 'antd';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Button, Dropdown, Space } from "antd";
+import React from "react";
+import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Header() {
   let user = useSelector((state) => state.userSlice.dataLogin);
@@ -9,13 +9,13 @@ export default function Header() {
   let navigate = useNavigate();
 
   let handleLogout = () => {
-    localStorage.removeItem('USER_LOGIN');
-    window.location.href = '/';
+    localStorage.removeItem("USER_LOGIN");
+    window.location.href = "/";
     // navigate("/login")
   };
   const items = [
     {
-      key: '1',
+      key: "1",
       label: (
         <span className="text-white" onClick={handleLogout}>
           Đăng xuất ra khỏi Netflix

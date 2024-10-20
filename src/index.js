@@ -5,7 +5,22 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { ConfigProvider } from "antd"; // Import ConfigProvider
 import userSlice from "./redux/userSlice";
+
+const theme = {
+    components: {
+      Tabs: {
+    inkBarColor: 'red',
+    colorBorder: 'rgb(20,20,20)',
+      },
+      Dropdown: {
+
+        colorBgElevated: 'black'
+      }
+    },
+};
+
 let store = configureStore({
   reducer: {
     userSlice,
@@ -15,7 +30,9 @@ let store = configureStore({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
+    <ConfigProvider theme={theme}> {/* Wrap App with ConfigProvider */}
+      <App />
+    </ConfigProvider>
   </Provider>
 );
 
