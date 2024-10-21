@@ -7,6 +7,7 @@ import HomePage from './page/HomePage/HomePage';
 import LoginPage from './page/LoginPage/LoginPage';
 import DetailMovie from './page/HomePage/DetailMovie';
 import AdminListUser from './page/Admin/AdminListUser';
+import ErrorPage from './page/ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<ErrorPage/>} />
         <Route path="/detail/:id" element={<DetailMovie />} />
         <Route path="/admin" element={<AdminListUser />} />
       </Routes>

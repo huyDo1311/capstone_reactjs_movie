@@ -77,13 +77,13 @@ export default function DetailMovie() {
             <div className="h-10 flex items-center">
               <span className="text-sm text-red-500">Trailer : </span>
 
-              <a
+              <as
                 target="_blank"
                 href={detailMovies?.trailer}
                 className="ms-3 hover:scale-125 transition "
               >
                 <i class="fa fa-play text-red-500 text-2xl "></i>
-              </a>
+              </as>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function DetailMovie() {
     );
   };
   let renderCinema = () => {
-    return (
+    return cinema?.heThongRapChieu.length > 0 ? (
       <div className="border-4 rounded border-red-600 mt-16 mx-7 p-10">
         <div>
           <p className="text-4xl text-center pb-7">
@@ -107,6 +107,12 @@ export default function DetailMovie() {
             }}
           />
         </div>
+      </div>
+    ) : (
+      <div className="border-4 rounded border-red-600 mt-16 mx-7 p-10">
+        <p className="text-4xl text-center ">
+          Phim này hiện đang không có xuất chiếu
+        </p>
       </div>
     );
   };

@@ -46,6 +46,10 @@ p {
   background-color: black !important;
 }
 
+#errorPage {
+  background: url('https://assets.nflxext.com/ffe/siteui/pages/errors/bg-mindhunter-v2.png');
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -63,3 +67,4 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000; 
 } 
+
