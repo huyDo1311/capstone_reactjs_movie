@@ -1,14 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  dataLogin: localStorage.getItem('USER_LOGIN')
-    ? JSON.parse(localStorage.getItem('USER_LOGIN'))
+  dataLogin: localStorage.getItem("USER_LOGIN")
+    ? JSON.parse(localStorage.getItem("USER_LOGIN"))
     : null,
-  truthy: '',
+  truthy: "",
+  dataTicket: {
+    id: "",
+    lichChieu: "",
+  },
 };
 
 const userSlice = createSlice({
-  name: 'userSlice',
+  name: "userSlice",
   initialState,
   reducers: {
     setUserAction: (state, action) => {
@@ -17,9 +21,12 @@ const userSlice = createSlice({
     clickToChange: (state, action) => {
       state.truthy = action.payload;
     },
+    setTicket: (state, action) => {
+      state.dataTicket = { ...state.dataTicket, ...action.payload };
+    },
   },
 });
 
-export const { setUserAction, clickToChange } = userSlice.actions;
+export const { setUserAction, clickToChange, setTicket } = userSlice.actions;
 
 export default userSlice.reducer;

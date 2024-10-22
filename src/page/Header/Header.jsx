@@ -28,7 +28,7 @@ export default function Header() {
     return (
       <div className="h-20 flex items-center justify-between">
         <div className="flex">
-          <NavLink to="/" className="text-2xl font-blod text-red-600">
+          <NavLink to="/home" className="text-2xl font-blod text-red-600">
             <img
               className="w-20"
               src="https://assets.nflxext.com/en_us/layout/ecweb/common/logo-shadow2x.png"

@@ -13,6 +13,11 @@ export let movieService = {
   layChiTietCumRap: (maPhim) => {
     return http.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`);
   },
+  layChiTietVe: (maPhim) => {
+    return http.get(
+      `/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maPhim}`
+    );
+  },
   layHeThongRap: () => {
     return http.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap`);
   },

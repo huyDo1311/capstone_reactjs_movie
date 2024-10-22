@@ -8,6 +8,7 @@ import LoginPage from './page/LoginPage/LoginPage';
 import DetailMovie from './page/HomePage/DetailMovie';
 import AdminListUser from './page/Admin/AdminListUser';
 import ErrorPage from './page/ErrorPage/ErrorPage';
+import MovieTickets from './page/HomePage/MovieTickets';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<LoginPage />} />
+        <Route path="/ticket-booking" element={<MovieTickets />} />
         <Route path="*" element={<ErrorPage/>} />
         <Route path="/detail/:id" element={<DetailMovie />} />
         <Route path="/admin" element={<AdminListUser />} />

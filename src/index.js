@@ -15,8 +15,10 @@ const theme = {
     colorBorder: 'rgb(20,20,20)',
       },
       Dropdown: {
-
         colorBgElevated: 'black'
+      },
+      Progress: {
+        circleTextColor : 'white'
       }
     },
 };

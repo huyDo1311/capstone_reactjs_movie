@@ -1,10 +1,15 @@
-import React, { Children, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { Children, useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { movieService } from "../../service/movieService";
-import { Divider, Tabs } from "antd";
+import { Divider, message, Progress, Tabs } from "antd";
 import moment from "moment/moment";
-import "./style.css";
+import { useDispatch } from "react-redux";
+import { setTicket } from "../../redux/userSlice";
 export default function DetailMovie() {
+  const takeDataTickets = (dataMa, dataLichChieu) => {
+    dispatch(setTicket({ id: dataMa, lichChieu: dataLichChieu }));
+    navigate("/ticket-booking");
+  };
   let { id } = useParams();
   const itemsCinema = () => {
     return cinema?.heThongRapChieu?.map((item) => {
@@ -25,7 +30,16 @@ export default function DetailMovie() {
                   <div className="grid grid-cols-2 gap-2 my-5 mx-2">
                     {item2.lichChieuPhim.slice(0, 3).map((item3) => {
                       return (
-                        <button className="bg-red-600 rounded">
+                        <button
+                          onClick={() => {
+                            takeDataTickets(
+                              item3.maLichChieu,
+                              item3.ngayChieuGioChieu
+                            );
+                          }}
+                          key={item3.maLichChieu}
+                          className="bg-red-600 rounded hover:bg-red-700 transition"
+                        >
                           <p className="text-center py-2">
                             {moment(item3.ngayChieuGioChieu).format(
                               "ddd, DD/MM - HH:mm"
@@ -46,44 +60,77 @@ export default function DetailMovie() {
   let renderDetail = () => {
     return (
       <div>
-        <p className="text-4xl font-semibold text-red-600 my-5">
-          Nội dung phim
-        </p>
-        <Divider
-          style={{
-            borderColor: "red",
-          }}
-        ></Divider>
-        <div className="flex">
-          <div className="border-r-2 border-red-600" style={{ width: "288px" }}>
-            <img className="w-56 rounded" src={detailMovies?.hinhAnh} alt="" />
-          </div>
-          <div className="ms-5">
-            <p className="font-bold text-xl ">{detailMovies?.tenPhim}</p>
-            <p className="text-xs w-96 my-5">
-              {" "}
-              <span className="text-red-600 text-sm"> Mô tả </span>:{" "}
-              {detailMovies?.moTa}
-            </p>
-            <div className="my-3">
-              {" "}
-              <span className="text-sm text-red-500">Lịch chiếu : </span>
-              <span className="text-sm text-white">
-                {moment(detailMovies?.ngayChieuGioChieu).format(
-                  "ddd, DD/MM - HH:mm"
-                )}
-              </span>
-            </div>
-            <div className="h-10 flex items-center">
-              <span className="text-sm text-red-500">Trailer : </span>
-
-              <as
-                target="_blank"
-                href={detailMovies?.trailer}
-                className="ms-3 hover:scale-125 transition "
+        <div>
+          <p className="text-4xl font-semibold text-red-600 my-5">
+            Nội dung phim
+          </p>
+          <Divider
+            style={{
+              borderColor: "red",
+            }}
+          ></Divider>
+          <div className="flex">
+            <div className="flex">
+              <div
+                className="border-r-2 border-red-600"
+                style={{ width: "288px" }}
               >
-                <i class="fa fa-play text-red-500 text-2xl "></i>
-              </as>
+                <img
+                  className="w-56 rounded"
+                  src={detailMovies?.hinhAnh}
+                  alt=""
+                />
+              </div>
+              <div className="ms-5">
+                <p className="font-bold text-xl ">{detailMovies?.tenPhim}</p>
+                <p className="text-xs w-96 my-5">
+                  {" "}
+                  <span className="text-red-600 text-sm"> Mô tả </span>:{" "}
+                  {detailMovies?.moTa}
+                </p>
+                <div className="my-3">
+                  {" "}
+                  <span className="text-sm text-red-500">Lịch chiếu : </span>
+                  <span className="text-sm text-white">
+                    {moment(detailMovies?.ngayChieuGioChieu).format(
+                      "ddd, DD/MM - HH:mm"
+                    )}
+                  </span>
+                </div>
+                <div className="h-10 flex items-center">
+                  <span className="text-sm text-red-500">Trailer : </span>
+
+                  <a
+                    target="_blank"
+                    href={detailMovies?.trailer}
+                    className="ms-3 hover:scale-125 transition "
+                  >
+                    <i class="fa fa-play text-red-500 text-2xl "></i>
+                  </a>
+                </div>
+                <div className="mt-4">
+                  <button
+                    onClick={handleScroll}
+                    className="px-10 py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-700"
+                  >
+                    Mua vé
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="w-full flex justify-center items-center">
+              <Progress
+                size={200}
+                className="text-white text-center"
+                strokeColor="red"
+                type="circle"
+                percent={detailMovies?.danhGia * 10}
+                format={() => (
+                  <span className="text-xl font-medium">
+                    {detailMovies?.danhGia}/ 10 điểm
+                  </span>
+                )}
+              />
             </div>
           </div>
         </div>
@@ -92,7 +139,10 @@ export default function DetailMovie() {
   };
   let renderCinema = () => {
     return cinema?.heThongRapChieu.length > 0 ? (
-      <div className="border-4 rounded border-red-600 mt-16 mx-7 p-10">
+      <div
+        ref={sectionRef}
+        className="border-4 rounded border-red-600 mt-16 mx-7 p-10"
+      >
         <div>
           <p className="text-4xl text-center pb-7">
             Các rạp phim hiện đang có suất chiếu{" "}
@@ -111,13 +161,21 @@ export default function DetailMovie() {
     ) : (
       <div className="border-4 rounded border-red-600 mt-16 mx-7 p-10">
         <p className="text-4xl text-center ">
-          Phim này hiện đang không có xuất chiếu
+          Phim này hiện đang không có suất chiếu
         </p>
       </div>
     );
   };
   const [detailMovies, setDetailMovies] = useState();
   const [cinema, setCinema] = useState();
+  const sectionRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleScroll = () => {
+    cinema.heThongRapChieu.length > 0
+      ? sectionRef.current.scrollIntoView({ behavior: "smooth" })
+      : message.info("Phim này hiện đang không có suất chiếu");
+  };
   useEffect(() => {
     movieService
       .layChiTietPhim(id)
