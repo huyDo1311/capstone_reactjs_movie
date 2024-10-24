@@ -6,8 +6,9 @@ const initialState = {
     : null,
   truthy: "",
   dataTicket: {
-    id: "",
-    lichChieu: "",
+    movieTicket: localStorage.getItem("DATA_TICKET")
+      ? JSON.parse(localStorage.getItem("DATA_TICKET"))
+      : "",
   },
 };
 

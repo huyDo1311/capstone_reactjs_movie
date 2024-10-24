@@ -3,6 +3,7 @@ import ListMoive from "./ListMoive";
 import CarouselMoive from "./CarouselMovie";
 import { useSelector } from "react-redux";
 import TabMovie from "./TabMovie";
+import MovieSelect from "./MovieSelect";
 
 export default function HomePage() {
   const user = useSelector((state) => state.userSlice.dataLogin);
@@ -12,6 +13,7 @@ export default function HomePage() {
       <CarouselMoive />
       <ListMoive />
       <TabMovie />
+      <MovieSelect />
     </>
   ) : (
     (window.location.href = "/")

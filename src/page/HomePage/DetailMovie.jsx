@@ -8,7 +8,9 @@ import { setTicket } from "../../redux/userSlice";
 export default function DetailMovie() {
   const takeDataTickets = (dataMa, dataLichChieu) => {
     dispatch(setTicket({ id: dataMa, lichChieu: dataLichChieu }));
-    navigate("/ticket-booking");
+    let dataJson = JSON.stringify({ id: dataMa, lichChieu: dataLichChieu });
+    localStorage.setItem("DATA_TICKET", dataJson);
+    window.location.href = "/ticket-booking";
   };
   let { id } = useParams();
   const itemsCinema = () => {
@@ -170,7 +172,6 @@ export default function DetailMovie() {
   const [cinema, setCinema] = useState();
   const sectionRef = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleScroll = () => {
     cinema.heThongRapChieu.length > 0
       ? sectionRef.current.scrollIntoView({ behavior: "smooth" })

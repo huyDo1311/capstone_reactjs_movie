@@ -21,4 +21,7 @@ export let movieService = {
   layHeThongRap: () => {
     return http.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap`);
   },
+  datVe: (ma) => {
+    return http.post(`/api/QuanLyDatVe/DatVe=${ma}`);
+  },
 };
