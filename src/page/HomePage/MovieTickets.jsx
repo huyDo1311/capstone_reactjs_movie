@@ -9,35 +9,48 @@ export default function MovieTickets() {
   let ticket = useSelector((state) => state.userSlice.dataTicket.movieTicket);
   // let cloneIsSelected = [];
   let { id } = useParams();
-  console.log(id, "id ne");
 
   let navigate = useNavigate();
-  let isClicked = (tenGhe) => {
+  let isClicked = (maGheNe, tenGhe) => {
     let cloneDataTicket = { ...dataMovieTicket };
     cloneDataTicket.danhSachGhe.forEach((item) => {
-      if (item.tenGhe === tenGhe) {
+      if (item.maGhe === maGheNe) {
         let pushDaChon = { ...item, daChon: false };
-        console.log(item.tenGhe);
         item.daChon = !item.daChon;
         console.log(item.daChon);
         if (item.daChon === true) {
           setIsSelected([...isSelected, "Ghế " + tenGhe + " , "]);
-          console.log("clq jz", item.daChon);
           setDisplayPrice((price) => (price += item.giaVe));
+          let cloneBookTicket = {
+            ...bookTicket,
+            maLichChieu: dataMovieTicket.thongTinPhim.maLichChieu,
+          };
+          let maGheGiaVe = {
+            maGhe: item.maGhe,
+            giaVe: item.giaVe,
+          };
+          console.log(maGheGiaVe, "ma gia ve");
+          let cloneDanhSachVe = [...danhSachVe, maGheGiaVe];
+          let pushBookTicket = { cloneBookTicket, danhSachVe: cloneDanhSachVe };
+          console.log(
+            "🚀 ~ cloneDataTicket.danhSachGhe.forEach ~ pushBookTicket:",
+            pushBookTicket
+          );
+
+          console.log(cloneBookTicket, "clone BOoking ticket ne");
         } else {
           setIsSelected((item) =>
             item.filter((ghe) => ghe !== "Ghế " + tenGhe + " , ")
           );
           setDisplayPrice((price) => (price -= item.giaVe));
         }
-        console.log(isSelected, "hai hung");
       }
     });
-    // setIsSelected(cloneIsSelected);
     setDataMovieTicket(cloneDataTicket);
-    console.log(dataMovieTicket, "dataMovieTicket ne");
   };
   let clickToUpdate = () => {};
+  const [danhSachVe, setdanhSachVe] = useState([]);
+  // const [bookTicket, setBookTicket] = useState();
   const [dataMovieTicket, setDataMovieTicket] = useState();
   const [isSelected, setIsSelected] = useState([]);
   const [displayPrice, setDisplayPrice] = useState(0);
@@ -48,7 +61,7 @@ export default function MovieTickets() {
           return (
             <button
               onClick={() => {
-                isClicked(chair.tenGhe);
+                isClicked(chair.maGhe, chair.tenGhe);
               }}
               className=" hover:bg-white transition border bg-red-600  border-white flex items-center rounded "
             >
