@@ -24,4 +24,4 @@ export let movieService = {
   datVe: (ma) => {
     return http.post(`/api/QuanLyDatVe/DatVe=${ma}`);
   },
-};
+};      

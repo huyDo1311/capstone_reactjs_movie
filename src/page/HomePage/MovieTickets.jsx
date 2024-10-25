@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { movieService } from "../../service/movieService";
 import { useSelector } from "react-redux";
-import { Card, Popover } from "antd";
-import moment from "moment";
-
+import { Card } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import LoadingPage from "../../component/LoadingPage";
 export default function MovieTickets() {
   let ticket = useSelector((state) => state.userSlice.dataTicket.movieTicket);
   // let cloneIsSelected = [];
+  let { id } = useParams();
+  console.log(id, "id ne");
 
+  let navigate = useNavigate();
   let isClicked = (tenGhe) => {
     let cloneDataTicket = { ...dataMovieTicket };
     cloneDataTicket.danhSachGhe.forEach((item) => {
@@ -31,8 +35,7 @@ export default function MovieTickets() {
     });
     // setIsSelected(cloneIsSelected);
     setDataMovieTicket(cloneDataTicket);
-    console.log(cloneDataTicket);
-    console.log(dataMovieTicket);
+    console.log(dataMovieTicket, "dataMovieTicket ne");
   };
   let clickToUpdate = () => {};
   const [dataMovieTicket, setDataMovieTicket] = useState();
@@ -41,23 +44,23 @@ export default function MovieTickets() {
   let renderChair = () => {
     return dataMovieTicket?.danhSachGhe.map((chair) => {
       if (chair.loaiGhe == "Thuong") {
-        if (chair.daDat === false) {
+        if (!chair.daDat) {
           return (
-            <Popover content={chair.stt}>
-              <button
-                onClick={() => {
-                  isClicked(chair.tenGhe);
-                }}
-                className=" hover:bg-white transition border  border-white flex items-center rounded "
-                style={{
-                  background: chair.daChon === true ? "#798645" : "#ef4444",
-                }}
-              >
-                <div className="w-full flex justify-center ">
-                  <img src="/assests/chairFalse.png" alt="" />
-                </div>
-              </button>
-            </Popover>
+            <button
+              onClick={() => {
+                isClicked(chair.tenGhe);
+              }}
+              className=" hover:bg-white transition border bg-red-600  border-white flex items-center rounded "
+            >
+              <div className="w-full flex justify-center text-xs">
+                {" "}
+                {chair.daChon === true ? (
+                  <img src="/assets/chairFalse.png" alt="" />
+                ) : (
+                  chair.stt
+                )}
+              </div>
+            </button>
           );
         } else {
           return (
@@ -67,25 +70,25 @@ export default function MovieTickets() {
           );
         }
       } else {
-        if (chair.daDat === false) {
+        if (!chair.daDat) {
           return (
-            <Popover content={chair.stt}>
-              <button
-                onClick={() => {
-                  isClicked(chair.tenGhe);
-                }}
-                className="bg-black hover:bg-white transition border  border-red-500 flex items-center  rounded"
-                style={{
-                  border: chair.daChon === true ? "1px white solid" : "",
-
-                  background: chair.daChon === true ? "#536493" : "",
-                }}
-              >
-                <div className="w-full flex justify-center ">
-                  <img src="/assests/chairTrue.png" alt="" />
-                </div>
-              </button>
-            </Popover>
+            <button
+              onClick={() => {
+                isClicked(chair.tenGhe);
+              }}
+              className="bg-black hover:bg-white  transition border group border-red-500 flex items-center  rounded"
+              style={{
+                border: chair.daChon && "1px white solid",
+              }}
+            >
+              <div className="w-full flex justify-center text-white text-xs ">
+                {chair.daChon === true ? (
+                  <img src="/assets/chairTrue.png" alt="" />
+                ) : (
+                  <p className=" group-hover:text-black"> {chair.stt}</p>
+                )}
+              </div>
+            </button>
           );
         } else {
           return (
@@ -97,7 +100,9 @@ export default function MovieTickets() {
       }
     });
   };
-
+  let handleTurnBack = () => {
+    navigate(`/detail/${id}`);
+  };
   useEffect(() => {
     movieService
       .layChiTietVe(ticket.id)
@@ -109,167 +114,230 @@ export default function MovieTickets() {
         console.log(err, "khong lay duoc");
       });
   }, []);
-
-  return (
-    <div className="grid grid-cols-2   ">
-      <div>
-        <div
-          className="grid gap-2"
-          style={{
-            gridTemplateColumns: "repeat(16, minmax(0, 1fr)",
-            height: "620px",
-          }}
-        >
-          {renderChair()}
-        </div>
-        <div className="flex justify-center mt-5 items-center">
-          <div
-            className="flex justify-center mt-10 items-center"
-            style={{ height: "100px" }}
-          >
-            <div className="text-white bg-slate-600 rounded border flex justify-center items-center py-4 px-7 ">
-              <p style={{ width: "15px" }}>X</p>
-            </div>
-            <p className="mx-5 text-center">Đã đặt</p>
-          </div>
-          <div
-            className="flex justify-center mt-10 items-center"
-            style={{ height: "100px" }}
-          >
-            <div className="bg-red-500 flex justify-center border rounded  py-5 px-7">
-              <img width="16px" src="/assests/chairFalse.png" alt="" />
-            </div>
-            <p className="mx-5 text-center">Thường</p>
-          </div>
-          <div
-            className="flex justify-center mt-10 items-center"
-            style={{ height: "100px" }}
-          >
-            <div className=" flex justify-center border border-red-500  rounded  py-5 px-7">
-              <img width="16px" src="/assests/chairTrue.png" alt="" />
-            </div>
-            <p className="mx-5 text-center">Vip</p>
-          </div>
+  let coverTicket = () => {
+    return (
+      <div
+        className="flex justify-between py-6 px-10   "
+        style={{ background: "rgb(20,20,20)" }}
+      >
+        <div className="flex justify-between">
+          <img
+            className="w-24"
+            src="https://assets.nflxext.com/en_us/layout/ecweb/common/logo-shadow2x.png"
+            alt=""
+          />
+          <img
+            onClick={handleTurnBack}
+            className="text-white  cursor-pointer hover:scale-125 transition"
+            src="/assets/back-arrow.png"
+            alt=""
+          />
         </div>
       </div>
-      <div>
-        <Card
-          bordered={false}
-          cover={
-            <div
-              className="flex justify-center py-6 px-10   "
-              style={{ background: "rgb(20,20,20)" }}
-            >
-              <img
-                className="w-24"
-                src="https://assets.nflxext.com/en_us/layout/ecweb/common/logo-shadow2x.png"
-                alt=""
-              />
+    );
+  };
+  return (
+    <div>
+      <LoadingPage />
+      <div className="bg-black py-1 ps-6 flex justify-center">
+        <img
+          onClick={() => {
+            navigate("/home");
+          }}
+          className="w-32 cursor-pointer"
+          src="
+https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+          alt=""
+        />
+      </div>
+
+      <div className="grid grid-cols-2 mt-5 ">
+        <div className="mt-10">
+          <div className="grid grid-cols-10">
+            <div>
+              {" "}
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                A
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                B
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                C
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                D
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                E
+              </div>
+              <div className="mb-1 text-white flex items-center justify-center  h-14 w-20">
+                F
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                G
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                H
+              </div>
+              <div className="mb-1 text-white flex items-center justify-center  h-14 w-20">
+                I
+              </div>
+              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+                J
+              </div>
             </div>
-          }
-          className="m-auto  bg-red-500 border-2"
-          style={{ width: 600 }}
-        >
-          <div className="flex justify-between">
-            <p
-              className=" text-lg font-medium"
-              style={{ color: "rgb(20,20,20)" }}
+            <div
+              className="grid gap-2 col-span-9"
+              style={{
+                gridTemplateColumns: "repeat(16, minmax(0, 1fr)",
+                height: "620px",
+              }}
             >
-              Cụm rạp:
-            </p>
-            <p>{dataMovieTicket?.thongTinPhim.tenCumRap}</p>
+              {renderChair()}
+            </div>
           </div>
-          <hr className="my-6 border-black   " />
-          <div className="flex justify-between">
-            <p
-              className="black text-lg font-medium"
-              style={{ color: "rgb(20,20,20)" }}
+          <div className="flex justify-center mt-3 ">
+            <div
+              className="flex justify-center  items-center"
+              style={{ height: "80px" }}
             >
-              Địa chỉ:
-            </p>
-            <p>{dataMovieTicket?.thongTinPhim.diaChi}</p>
+              <div className="text-white bg-slate-600 rounded border flex justify-center items-center py-4 px-7 ">
+                <p style={{ width: "15px" }}>X</p>
+              </div>
+              <p className="mx-5 text-center">Đã đặt</p>
+            </div>
+            <div
+              className="flex justify-center  items-center"
+              style={{ height: "80px" }}
+            >
+              <div className="bg-red-500 flex justify-center border rounded  py-5 px-7">
+                <img width="16px" src="/assets/chairFalse.png" alt="" />
+              </div>
+              <p className="mx-5 text-center">Thường</p>
+            </div>
+            <div
+              className="flex justify-center  items-center"
+              style={{ height: "80px" }}
+            >
+              <div className=" flex justify-center border border-red-500  rounded  py-5 px-7">
+                <img width="16px" src="/assets/chairTrue.png" alt="" />
+              </div>
+              <p className="mx-5 text-center">Vip</p>
+            </div>
           </div>
-          <hr className="my-6 border-black" />
+        </div>
+        <div>
+          <Card
+            bordered={false}
+            cover={coverTicket()}
+            className="m-auto  bg-red-500 border-2"
+            style={{ width: 600 }}
+          >
+            <div className="flex justify-between">
+              <p
+                className=" text-lg font-medium"
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Cụm rạp:
+              </p>
+              <p>{dataMovieTicket?.thongTinPhim.tenCumRap}</p>
+            </div>
+            <hr className="my-6 border-black   " />
+            <div className="flex justify-between">
+              <p
+                className="black text-lg font-medium"
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Địa chỉ:
+              </p>
+              <p className="max-w-72">{dataMovieTicket?.thongTinPhim.diaChi}</p>
+            </div>
+            <hr className="my-6 border-black" />
 
-          <div className="flex justify-between">
-            <p
-              className="black text-lg font-medium 
+            <div className="flex justify-between">
+              <p
+                className="black text-lg font-medium 
             
             "
-              style={{ color: "rgb(20,20,20)" }}
-            >
-              Rạp:
-            </p>
-            <p>{dataMovieTicket?.thongTinPhim.tenRap}</p>
-          </div>
-          <hr className="my-6 border-black" />
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Rạp:
+              </p>
+              <p>{dataMovieTicket?.thongTinPhim.tenRap}</p>
+            </div>
+            <hr className="my-6 border-black" />
 
-          <div className="flex justify-between">
-            <p
-              className="black text-lg font-medium 
+            <div className="flex justify-between">
+              <p
+                className="black text-lg font-medium 
             
             "
-              style={{ color: "rgb(20,20,20)" }}
-            >
-              Ngày giờ chiếu:
-            </p>
-            <p>{moment(ticket?.lichChieu).format("DD/MM/YYYY - HH:mm")}</p>
-          </div>
-          <hr className="my-6 border-black" />
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Ngày giờ chiếu:
+              </p>
+              <p>{ticket?.lichChieu}</p>
+            </div>
+            <hr className="my-6 border-black" />
 
-          <div className="flex justify-between">
-            <p
-              className="black text-lg font-medium 
+            <div className="flex justify-between">
+              <p
+                className="black text-lg font-medium 
             
             "
-              style={{ color: "rgb(20,20,20)" }}
-            >
-              Tên Phim:
-            </p>
-            <p>{dataMovieTicket?.thongTinPhim.tenPhim}</p>
-          </div>
-          <hr className="my-6 border-black" />
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Tên Phim:
+              </p>
+              <p>{dataMovieTicket?.thongTinPhim.tenPhim}</p>
+            </div>
+            <hr className="my-6 border-black" />
 
-          <div className="flex justify-between">
-            <p
-              className="black text-lg font-medium 
+            <div className="flex justify-between">
+              <p
+                className="black text-lg font-medium 
             
             "
-              style={{ color: "rgb(20,20,20)" }}
-            >
-              Chọn:
-            </p>
-            <p className="max-w-80">{isSelected}</p>
-          </div>
-          <hr className="my-6 border-black" />
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Chọn:
+              </p>
+              <p className="max-w-80">{isSelected}</p>
+            </div>
+            <hr className="my-6 border-black" />
 
-          <div className="flex justify-between">
-            <p
-              className="black text-xl font-medium 
+            <div className="flex justify-between">
+              <p
+                className="black text-xl font-medium 
             
             "
-              style={{ color: "rgb(20,20,20)" }}
-            >
-              Giá:
-            </p>
-            <p className="text-lg">
-              {new Intl.NumberFormat("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              }).format(displayPrice)}
-            </p>
-          </div>
-          <hr className="my-6 border-black" />
+                style={{ color: "rgb(20,20,20)" }}
+              >
+                Giá:
+              </p>
+              <p className="text-lg">
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(displayPrice)}
+              </p>
+            </div>
+            <hr className="my-6 border-black" />
 
-          <div className="flex justify-center mt-3">
-            <button
-              onClick={clickToUpdate}
-              className="py-2 px-20 rounded bg-black text-white hover:scale-125 transition"
-            >
-              Đặt vé
-            </button>
-          </div>
-        </Card>
+            <div className="flex justify-center mt-3">
+              <motion.button
+                onClick={clickToUpdate}
+                className="py-2 px-20 rounded bg-black text-white "
+                whileHover={{ scale: 1.1 }} // Scale up on hover
+                whileTap={{ scale: 0.9 }} // Scale down on tap
+                transition={{ type: "spring", stiffness: 400, damping: 10 }} // Spring animation
+              >
+                Đặt vé
+              </motion.button>
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   );

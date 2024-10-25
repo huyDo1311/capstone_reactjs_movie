@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { movieService } from "../../service/movieService";
 import { Divider, message, Progress, Tabs } from "antd";
@@ -6,13 +6,14 @@ import moment from "moment/moment";
 import { useDispatch } from "react-redux";
 import { setTicket } from "../../redux/userSlice";
 export default function DetailMovie() {
+  let { id } = useParams();
+
   const takeDataTickets = (dataMa, dataLichChieu) => {
     dispatch(setTicket({ id: dataMa, lichChieu: dataLichChieu }));
     let dataJson = JSON.stringify({ id: dataMa, lichChieu: dataLichChieu });
     localStorage.setItem("DATA_TICKET", dataJson);
-    window.location.href = "/ticket-booking";
+    window.location.href = `/ticket-booking/${id}`;
   };
-  let { id } = useParams();
   const itemsCinema = () => {
     return cinema?.heThongRapChieu?.map((item) => {
       return {

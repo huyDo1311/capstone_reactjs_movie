@@ -61,7 +61,13 @@ export default function CarouselMoive() {
   return (
     <div>
       <div>
-        <Carousel arrows dots={false} autoplaySpeed={1500} autoplay>
+        <Carousel
+          style={{ backgroundColor: "blue" }}
+          arrows
+          dots={false}
+          autoplaySpeed={1500}
+          autoplay
+        >
           {renderCarousel()}
         </Carousel>
         <ModalVideo

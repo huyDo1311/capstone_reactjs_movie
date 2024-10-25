@@ -14,22 +14,18 @@ a {
 #LoginPage {
   background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/f272782d-cf96-4988-a675-6db2afd165e0/web/VN-vi-20241008-TRIFECTA-perspective_c29be0e2-f079-4da0-8b1e-e638e63181d5_medium.jpg');
   background-size: cover;
-  
-
-  height: 800px;
-  position: relative;
+  height: 100%;
+  width: 100%;
 }
 .overlay {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+ width: 100%;
+ height: 100%;
   background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .content {
-  position: relative;
   z-index: 1;
 }
 
@@ -43,12 +39,10 @@ p {
 }
 
 .modal-video {
-  background-color: black !important;
+  background-color: rgba(0, 0, 0, 0.45) !important;
 }
 
-#errorPage {
-  background: url('https://assets.nflxext.com/ffe/siteui/pages/errors/bg-mindhunter-v2.png');
-}
+
 
 ::-webkit-scrollbar {
   width: 10px;

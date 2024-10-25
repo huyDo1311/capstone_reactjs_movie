@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { turnOnLoading, turnOffLoading } from "../redux/loadingSlice";
+import { store } from "../index";
 export let http = axios.create({
   baseURL: "https://movienew.cybersoft.edu.vn",
   headers: {
@@ -9,3 +10,36 @@ export let http = axios.create({
       "bearer " + JSON.parse(localStorage.getItem("USER_LOGIN"))?.accessToken,
   },
 });
+
+http.interceptors.request.use(
+  function (config) {
+    console.log("len");
+    console.log(config);
+    store.dispatch(turnOnLoading());
+    return config;
+  },
+  function (err) {
+    store.dispatch(turnOffLoading());
+    return err;
+  }
+);
+
+// Add a response interceptor
+http.interceptors.response.use(
+  function (response) {
+    console.log("response về");
+    setTimeout(() => {
+      store.dispatch(turnOffLoading());
+    }, 3000);
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+  },
+  function (error) {
+    store.dispatch(turnOffLoading());
+
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return Promise.reject(error);
+  }
+);

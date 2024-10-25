@@ -7,6 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd"; // Import ConfigProvider
 import userSlice from "./redux/userSlice";
+import loadingSlice from './redux/loadingSlice'
 
 const theme = {
     components: {
@@ -19,13 +20,21 @@ const theme = {
       },
       Progress: {
         circleTextColor : 'white'
+      },
+      Modal: {
+        contentBg: 'rgb(20,20,20)',
+        headerBg: 'rgb(20,20,20)',
+        footerBg: 'rgb(20,20,20)',
+        titleColor: 'rgb(20,20,20)',
+        borderRadiusLG: 10
       }
     },
 };
 
-let store = configureStore({
+export let store = configureStore({
   reducer: {
-    userSlice,
+    userSlice: userSlice,
+    loadingSlice: loadingSlice,
   },
 });
 

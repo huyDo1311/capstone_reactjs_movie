@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { clickToChange } from '../../redux/userSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { clickToChange } from "../../redux/userSlice";
 export default function HeaderLoginPage() {
   //   const [truthy, setTruthy] = useState(false);
   const truthy = useSelector((state) => state.userSlice.truthy);
@@ -9,7 +9,7 @@ export default function HeaderLoginPage() {
   console.log(truthy);
   let navigate = useNavigate();
   let handleClick = () => {
-    navigate('/login');
+    navigate("/login");
     dispatch(clickToChange(1));
   };
   let renderHeaderLogin = () => {

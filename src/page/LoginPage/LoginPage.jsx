@@ -1,17 +1,17 @@
-import React from 'react';
-import FormLogin from './FormLogin';
-import FormRegister from './FormRegister';
-import HeaderLoginPage from '../Header/HeaderLoginPage';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { clickToChange } from '../../redux/userSlice';
+import React from "react";
+import FormLogin from "./FormLogin";
+import FormRegister from "./FormRegister";
+import HeaderLoginPage from "../Header/HeaderLoginPage";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clickToChange } from "../../redux/userSlice";
 export default function LoginPage() {
   const truthy = useSelector((state) => state.userSlice.truthy);
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let login = () => {
     setTimeout(() => {
-      navigate('/register');
+      navigate("/register");
       dispatch(clickToChange(2));
     }, 1000);
   };
@@ -54,9 +54,11 @@ export default function LoginPage() {
   return (
     <div id="LoginPage">
       <div className="overlay"></div>
-      <div className="content ">
+      <div className="content relative z-10 w-screen h-screen">
         <HeaderLoginPage />
-        <div className="mt-10">{renderLoginPage()}</div>
+        <div className="h-2/3 flex items-center justify-center">
+          {renderLoginPage()}
+        </div>
       </div>
     </div>
   );

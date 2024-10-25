@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, Checkbox, Form, Input, message } from 'antd';
-import { http } from '../../service/config';
-import { useDispatch } from 'react-redux';
-import { clickToChange, setUserAction } from '../../redux/userSlice';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Button, Checkbox, Form, Input, message } from "antd";
+import { http } from "../../service/config";
+import { useDispatch } from "react-redux";
+import { clickToChange, setUserAction } from "../../redux/userSlice";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function FormLogin() {
   let dispatch = useDispatch();
@@ -13,41 +13,41 @@ export default function FormLogin() {
     // console.log("Success:", values);
 
     http
-      .post('/api/QuanLyNguoiDung/DangNhap', values)
+      .post("/api/QuanLyNguoiDung/DangNhap", values)
       .then((result) => {
         // console.log("result", result.data.content);
 
-        message.success('Login success');
+        message.success("Login success");
 
         dispatch(setUserAction(result.data.content));
-        console.log(result, 'admin');
+        console.log(result, "admin");
         let dataJson = JSON.stringify(result.data.content);
 
-        localStorage.setItem('USER_LOGIN', dataJson);
-        if (result.data.content.maLoaiNguoiDung == 'QuanTri') {
-          navigate('/admin');
+        localStorage.setItem("USER_LOGIN", dataJson);
+        if (result.data.content.maLoaiNguoiDung == "QuanTri") {
+          navigate("/admin");
         } else {
           setTimeout(() => {
-            navigate('/home');
+            navigate("/home");
           }, 1000);
         }
       })
       .catch((err) => {
-        message.info('Login fail');
-        console.log('err', err);
+        message.info("Login fail");
+        console.log("err", err);
       });
   };
 
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
-    message.error('Login failed');
+    message.error("Login failed");
   };
 
   return (
     <div>
       <div
         className="text-center w-96 mx-auto"
-        style={{ height: '500px', backgroundColor: 'rgba(0,0,0,0.7)' }}
+        style={{ height: "500px", backgroundColor: "rgba(0,0,0,0.7)" }}
       >
         <div className="p-14">
           <p className="text-left text-white text-3xl mb-8">Đăng Nhập</p>
@@ -61,12 +61,12 @@ export default function FormLogin() {
             }}
             style={{
               maxWidth: 300,
-              margin: 'auto',
+              margin: "auto",
             }}
             initialValues={{
               // remember: true,
-              taiKhoan: 'nhiNguvl',
-              matKhau: '123',
+              taiKhoan: "nhiNguvl",
+              matKhau: "123",
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -74,7 +74,7 @@ export default function FormLogin() {
             // layout="vertical"
           >
             <Form.Item
-              style={{ width: '410px' }}
+              style={{ width: "410px" }}
               name="taiKhoan"
               rules={[
                 {
@@ -91,7 +91,7 @@ export default function FormLogin() {
             </Form.Item>
 
             <Form.Item
-              style={{ width: '410px' }}
+              style={{ width: "410px" }}
               name="matKhau"
               rules={[
                 {
@@ -108,7 +108,7 @@ export default function FormLogin() {
             </Form.Item>
 
             <Button
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               type="primary"
               htmlType="Đăng nhập"
               className="bg-red-600 text-white "
@@ -117,19 +117,19 @@ export default function FormLogin() {
             </Button>
           </Form>
           <p
-            style={{ color: 'rgba(255,255,255,0.7)' }}
+            style={{ color: "rgba(255,255,255,0.7)" }}
             className=" text-sm, my-3"
           >
             HOẶC
           </p>
           <Button
-            style={{ width: '100%', background: 'rgba(128,128,128,0.3)' }}
+            style={{ width: "100%", background: "rgba(128,128,128,0.3)" }}
             className="bg-red-600 text-white border-transparent mb-2"
           >
             Sử dụng mã đăng nhập
           </Button>
-          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.7)' }}>
-            Bạn mới tham gia Netflix?{' '}
+          <span className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>
+            Bạn mới tham gia Netflix?{" "}
             <NavLink
               to="/register"
               onClick={() => {
