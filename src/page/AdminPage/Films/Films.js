@@ -258,7 +258,10 @@ export default function Films() {
 
             }}
           >
-            Tạo lịch chiếu
+            
+            <NavLink onClick={() => {
+              localStorage.setItem('filmParam',JSON.stringify(record))
+            }} to={`/admin/films/showtime/${record.maPhim}/${record.tenPhim}`}>Tạo lịch chiếu</NavLink>
           </Button>
         </div>
       ),

@@ -37,8 +37,9 @@ function App() {
         <Route path="/admin/films" element={<AdminTemplate component={<Films />} />} />
         <Route path="/admin/films/addnew" element={<AdminTemplate component={<AddNew />} />} />
         <Route path="/admin/films/edit/:id" element={<AdminTemplate component={<Edit />} />} />
+        <Route path="/admin/films/showtime/:id/:tenphim" element={<AdminTemplate component={<ShowTime />} />} />
         <Route path="/admin/users" element={<AdminTemplate component={<DashBroad />} />} />
-        <Route path="/admin/show-times" element={<AdminTemplate component={<ShowTime />} />} />
+        {/* <Route path="/admin/show-times" element={<AdminTemplate component={<ShowTime />} />} /> */}
       </Routes>
     </BrowserRouter>
   );
