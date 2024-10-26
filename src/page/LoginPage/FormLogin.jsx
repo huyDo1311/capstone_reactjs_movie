@@ -63,11 +63,10 @@ export default function FormLogin() {
               maxWidth: 300,
               margin: "auto",
             }}
-            initialValues={{
-              // remember: true,
-              taiKhoan: "nhiNguvl",
-              matKhau: "123",
-            }}
+            // initialValues={{
+            //   taiKhoan: "nhiNguvl",
+            //   matKhau: "123",
+            // }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"

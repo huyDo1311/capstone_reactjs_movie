@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { movieService } from "../../service/movieService";
 import { useSelector } from "react-redux";
-import { Card } from "antd";
+import { Card, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import LoadingPage from "../../component/LoadingPage";
@@ -9,7 +9,6 @@ export default function MovieTickets() {
   let ticket = useSelector((state) => state.userSlice.dataTicket.movieTicket);
   // let cloneIsSelected = [];
   let { id } = useParams();
-
   let navigate = useNavigate();
   let isClicked = (maGheNe, tenGhe) => {
     let cloneDataTicket = { ...dataMovieTicket };
@@ -21,23 +20,18 @@ export default function MovieTickets() {
         if (item.daChon === true) {
           setIsSelected([...isSelected, "Ghế " + tenGhe + " , "]);
           setDisplayPrice((price) => (price += item.giaVe));
-          let cloneBookTicket = {
-            ...bookTicket,
-            maLichChieu: dataMovieTicket.thongTinPhim.maLichChieu,
-          };
-          let maGheGiaVe = {
+          // let cloneBookTicket = {
+          //   ...bookTicket,
+          //   maLichChieu: dataMovieTicket.thongTinPhim.maLichChieu,
+          // };
+          let maVe = {
             maGhe: item.maGhe,
             giaVe: item.giaVe,
           };
-          console.log(maGheGiaVe, "ma gia ve");
-          let cloneDanhSachVe = [...danhSachVe, maGheGiaVe];
-          let pushBookTicket = { cloneBookTicket, danhSachVe: cloneDanhSachVe };
-          console.log(
-            "🚀 ~ cloneDataTicket.danhSachGhe.forEach ~ pushBookTicket:",
-            pushBookTicket
-          );
+          // console.log(maVe);x
+          setDanhSachVe([...danhSachVe, maVe]);
 
-          console.log(cloneBookTicket, "clone BOoking ticket ne");
+          console.log(danhSachVe);
         } else {
           setIsSelected((item) =>
             item.filter((ghe) => ghe !== "Ghế " + tenGhe + " , ")
@@ -48,12 +42,28 @@ export default function MovieTickets() {
     });
     setDataMovieTicket(cloneDataTicket);
   };
-  let clickToUpdate = () => {};
-  const [danhSachVe, setdanhSachVe] = useState([]);
-  // const [bookTicket, setBookTicket] = useState();
+
+  let clickToUpdate = () => {
+    console.log(bookTicket, "deo dc");
+    if (isSelected.length <= 0) {
+      message.info("bạn cần phải chọn ghế");
+    } else {
+      message.success("Đặt thành công");
+      setIsBooking(true);
+      setBookTicket({
+        ...bookTicket,
+        maLichChieu: dataMovieTicket.thongTinPhim.maLichChieu,
+        danhSachVe: danhSachVe,
+      });
+    }
+  };
+
+  const [danhSachVe, setDanhSachVe] = useState([]);
+  const [bookTicket, setBookTicket] = useState({});
   const [dataMovieTicket, setDataMovieTicket] = useState();
   const [isSelected, setIsSelected] = useState([]);
   const [displayPrice, setDisplayPrice] = useState(0);
+  const [isBooking, setIsBooking] = useState(false);
   let renderChair = () => {
     return dataMovieTicket?.danhSachGhe.map((chair) => {
       if (chair.loaiGhe == "Thuong") {
@@ -87,7 +97,7 @@ export default function MovieTickets() {
           return (
             <button
               onClick={() => {
-                isClicked(chair.tenGhe);
+                isClicked(chair.maGhe, chair.tenGhe);
               }}
               className="bg-black hover:bg-white  transition border group border-red-500 flex items-center  rounded"
               style={{
@@ -126,7 +136,15 @@ export default function MovieTickets() {
       .catch((err) => {
         console.log(err, "khong lay duoc");
       });
-  }, []);
+    if (isBooking) {
+      movieService
+        .datVe(bookTicket)
+        .then((res) => console.log(res, "em iu"))
+        .catch((err) => console.log(err, "an l roi"))
+        .finally(() => setIsBooking(false));
+    }
+  }, [bookTicket]);
+
   let coverTicket = () => {
     return (
       <div
