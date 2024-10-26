@@ -67,6 +67,10 @@ export default function FormLogin() {
             //   taiKhoan: "nhiNguvl",
             //   matKhau: "123",
             // }}
+            initialValues={{
+              taiKhoan: "testAdmin12",
+              matKhau: "123",
+            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"

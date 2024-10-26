@@ -7,7 +7,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd"; // Import ConfigProvider
 import userSlice from "./redux/userSlice";
-import loadingSlice from './redux/loadingSlice'
+import loadingSlice from './redux/loadingSlice';
+import quanLyNguoiDungSlice from './redux/reducers/quanLyNguoiDungSlice';
+import quanLyPhimSlice from './redux/reducers/quanLyPhimSlice';
+
 
 const theme = {
     components: {
@@ -35,6 +38,8 @@ export let store = configureStore({
   reducer: {
     userSlice: userSlice,
     loadingSlice: loadingSlice,
+    quanLyNguoiDungSlice: quanLyNguoiDungSlice,
+    quanLyPhimSlice : quanLyPhimSlice,
   },
 });
 
