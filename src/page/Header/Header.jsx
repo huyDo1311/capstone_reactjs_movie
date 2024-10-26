@@ -33,11 +33,7 @@ export default function Header() {
   };
 
   let optionTime = () => {
-    console.log(storeData, " uoc gi giau");
-
     return storeData?.flatMap((item) => {
-      console.log(item, "uoc gi gioi");
-
       return item.lichChieuPhim.map((schedule) => {
         return {
           value: schedule.maLichChieu,
@@ -78,11 +74,10 @@ export default function Header() {
   };
   let handleChangeCinema = (id) => {
     const selectCinema = cinema?.heThongRapChieu.find((item) => {
-      return item.maHeThongRap === id; // Find the matching cinema
+      return item.maHeThongRap === id;
     });
 
     if (selectCinema) {
-      console.log("Match found:", selectCinema);
       setSelectedCinema(id);
       setSelectedTime(null);
       setStoreData(selectCinema.cumRapChieu);
@@ -233,7 +228,7 @@ export default function Header() {
               </div>
               <button
                 className="px-6 py-1 mt-3 font-normal bg-red-500 hover:bg-red-600 active:bg-slate-800 rounded border border-white"
-                onClick={handleOk} // Add your own OK button if needed
+                onClick={handleOk}
               >
                 Mua vé
               </button>

@@ -20,15 +20,10 @@ export default function MovieTickets() {
         if (item.daChon === true) {
           setIsSelected([...isSelected, "Ghế " + tenGhe + " , "]);
           setDisplayPrice((price) => (price += item.giaVe));
-          // let cloneBookTicket = {
-          //   ...bookTicket,
-          //   maLichChieu: dataMovieTicket.thongTinPhim.maLichChieu,
-          // };
           let maVe = {
             maGhe: item.maGhe,
             giaVe: item.giaVe,
           };
-          // console.log(maVe);x
           setDanhSachVe([...danhSachVe, maVe]);
 
           console.log(danhSachVe);
@@ -36,6 +31,8 @@ export default function MovieTickets() {
           setIsSelected((item) =>
             item.filter((ghe) => ghe !== "Ghế " + tenGhe + " , ")
           );
+
+          setDanhSachVe((ve) => ve.filter((item) => item.maGhe != maGheNe));
           setDisplayPrice((price) => (price -= item.giaVe));
         }
       }
@@ -45,11 +42,12 @@ export default function MovieTickets() {
 
   let clickToUpdate = () => {
     console.log(bookTicket, "deo dc");
-    if (isSelected.length <= 0) {
+    if (isSelected.length <= 0 && danhSachVe <= 0) {
       message.info("bạn cần phải chọn ghế");
     } else {
       message.success("Đặt thành công");
       setIsBooking(true);
+
       setBookTicket({
         ...bookTicket,
         maLichChieu: dataMovieTicket.thongTinPhim.maLichChieu,
@@ -59,6 +57,7 @@ export default function MovieTickets() {
   };
 
   const [danhSachVe, setDanhSachVe] = useState([]);
+  console.log(danhSachVe, "k phai tui");
   const [bookTicket, setBookTicket] = useState({});
   const [dataMovieTicket, setDataMovieTicket] = useState();
   const [isSelected, setIsSelected] = useState([]);
