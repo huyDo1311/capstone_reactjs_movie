@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, Form, Input, message } from 'antd';
-import { clickToChange, setUserAction } from '../../redux/userSlice';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { http } from '../../service/config';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import { Button, Form, Input, message } from "antd";
+import { clickToChange, setUserAction } from "../../redux/userSlice";
+import { NavLink, useNavigate } from "react-router-dom";
+import { http } from "../../service/config";
+import { useDispatch } from "react-redux";
 
 export default function FormRegister() {
   let navigate = useNavigate();
@@ -12,29 +12,29 @@ export default function FormRegister() {
     // console.log("Success:", values);
 
     http
-      .post('/api/QuanLyNguoiDung/DangKy', values)
+      .post("/api/QuanLyNguoiDung/DangKy", values)
       .then((result) => {
-        message.info('Register success');
+        message.info("Register success");
         setTimeout(() => {
           dispatch(clickToChange(1));
         }, 1000);
       })
       .catch((err) => {
-        message.info('Register fail');
-        console.log('err', err);
+        message.info("Register fail");
+        console.log("err", err);
       });
   };
 
   const onFinishFailed = (errorInfo) => {
     // console.log("Failed:", errorInfo);
-    message.error('Login failed');
+    message.error("Login failed");
   };
   return (
     <div>
-      {' '}
+      {" "}
       <div
         className="text-center w-96 mx-auto"
-        style={{ height: '550px', backgroundColor: 'rgba(0,0,0,0.7)' }}
+        style={{ height: "550px", backgroundColor: "rgba(0,0,0,0.7)" }}
       >
         <div className="p-14">
           <p className="text-left text-white text-3xl mb-8">Đăng Ký</p>
@@ -46,17 +46,13 @@ export default function FormRegister() {
             wrapperCol={{
               span: 16,
             }}
-            style={{
-              maxWidth: 300,
-              margin: 'auto',
-            }}
             onFinish={onFinishRegister}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             // layout="vertical"
           >
             <Form.Item
-              style={{ width: '410px' }}
+              noStyle
               name="hoTen"
               rules={[
                 {
@@ -69,23 +65,27 @@ export default function FormRegister() {
             >
               <Input className="py-3" placeholder="Họ và tên" />
             </Form.Item>
+            <div className="my-6">
+              <Form.Item
+                noStyle
+                name="email"
+                rules={[
+                  {
+                    type: "email",
+                    required: true,
+                    message: (
+                      <span className="text-xs">
+                        Vui lòng nhập email hợp lệ.
+                      </span>
+                    ),
+                  },
+                ]}
+              >
+                <Input className="py-3" placeholder="Email" />
+              </Form.Item>
+            </div>
             <Form.Item
-              style={{ width: '410px' }}
-              name="email"
-              rules={[
-                {
-                  type: 'email',
-                  required: true,
-                  message: (
-                    <span className="text-xs">Vui lòng nhập email hợp lệ.</span>
-                  ),
-                },
-              ]}
-            >
-              <Input className="py-3" placeholder="Email" />
-            </Form.Item>
-            <Form.Item
-              style={{ width: '410px' }}
+              noStyle
               name="taiKhoan"
               rules={[
                 {
@@ -103,11 +103,11 @@ export default function FormRegister() {
 
             <div className="my-5">
               <Form.Item
-                style={{ width: '410px' }}
+                noStyle
                 name="matKhau"
                 rules={[
                   {
-                    type: 'string',
+                    type: "string",
                     required: true,
                     message: (
                       <span className="text-xs">Vui lòng nhập mật khẩu</span>
@@ -120,7 +120,7 @@ export default function FormRegister() {
             </div>
 
             <Button
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               type="primary"
               htmlType="Đăng ký"
               className="bg-red-600 text-white mb-5 "
@@ -129,8 +129,8 @@ export default function FormRegister() {
             </Button>
           </Form>
 
-          <span className="text-xs " style={{ color: 'rgba(255,255,255,0.7)' }}>
-            Bạn đã có tài khoản?{' '}
+          <span className="text-xs " style={{ color: "rgba(255,255,255,0.7)" }}>
+            Bạn đã có tài khoản?{" "}
             <NavLink
               to="/login"
               onClick={() => {

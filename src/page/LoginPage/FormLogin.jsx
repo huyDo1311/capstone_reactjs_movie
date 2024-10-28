@@ -59,10 +59,6 @@ export default function FormLogin() {
             wrapperCol={{
               span: 16,
             }}
-            style={{
-              maxWidth: 300,
-              margin: "auto",
-            }}
             // initialValues={{
             //   taiKhoan: "nhiNguvl",
             //   matKhau: "123",
@@ -76,39 +72,43 @@ export default function FormLogin() {
             autoComplete="off"
             // layout="vertical"
           >
-            <Form.Item
-              style={{ width: "410px" }}
-              name="taiKhoan"
-              rules={[
-                {
-                  required: true,
-                  message: (
-                    <span className="text-xs">
-                      Vui lòng nhập email hoặc số điện thoại hợp lệ.
-                    </span>
-                  ),
-                },
-              ]}
-            >
-              <Input className="py-3" />
-            </Form.Item>
+            <div>
+              <Form.Item
+                noStyle
+                name="taiKhoan"
+                rules={[
+                  {
+                    required: true,
+                    message: (
+                      <span className="text-xs">
+                        Vui lòng nhập email hoặc số điện thoại hợp lệ.
+                      </span>
+                    ),
+                  },
+                ]}
+              >
+                <Input placeholder="Tài khoản" className="py-3" />
+              </Form.Item>
+            </div>
 
-            <Form.Item
-              style={{ width: "410px" }}
-              name="matKhau"
-              rules={[
-                {
-                  required: true,
-                  message: (
-                    <span className="text-xs">
-                      Mật khẩu của bạn phải chứa từ 4 đến 60 ký tự.
-                    </span>
-                  ),
-                },
-              ]}
-            >
-              <Input.Password className="py-3" />
-            </Form.Item>
+            <div className="my-8">
+              <Form.Item
+                noStyle
+                name="matKhau"
+                rules={[
+                  {
+                    required: true,
+                    message: (
+                      <span className="text-xs">
+                        Mật khẩu của bạn phải chứa từ 4 đến 60 ký tự.
+                      </span>
+                    ),
+                  },
+                ]}
+              >
+                <Input.Password placeholder="Mật khẩu" className="py-3" />
+              </Form.Item>
+            </div>
 
             <Button
               style={{ width: "100%" }}

@@ -5,6 +5,7 @@ import { Card, message } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import LoadingPage from "../../component/LoadingPage";
+import moment from "moment";
 export default function MovieTickets() {
   let ticket = useSelector((state) => state.userSlice.dataTicket.movieTicket);
   // let cloneIsSelected = [];
@@ -72,7 +73,7 @@ export default function MovieTickets() {
               onClick={() => {
                 isClicked(chair.maGhe, chair.tenGhe);
               }}
-              className=" hover:bg-white transition border bg-red-600  border-white flex items-center rounded "
+              className=" hover:bg-white transition border bg-red-600  border-white flex items-center rounded h-8 w-6  md:h-auto md:w-auto "
             >
               <div className="w-full flex justify-center text-xs">
                 {" "}
@@ -86,7 +87,7 @@ export default function MovieTickets() {
           );
         } else {
           return (
-            <div className="text-white bg-slate-600 rounded border flex justify-center items-center text-sm">
+            <div className="text-white bg-slate-600 rounded border flex justify-center items-center text-sm h-8 w-6 md:h-auto md:w-auto">
               X
             </div>
           );
@@ -98,12 +99,12 @@ export default function MovieTickets() {
               onClick={() => {
                 isClicked(chair.maGhe, chair.tenGhe);
               }}
-              className="bg-black hover:bg-white  transition border group border-red-500 flex items-center  rounded"
+              className="bg-black hover:bg-white  transition border group border-red-500 flex items-center justify-center rounded h-8 w-6 md:h-auto md:w-auto"
               style={{
                 border: chair.daChon && "1px white solid",
               }}
             >
-              <div className="w-full flex justify-center text-white text-xs ">
+              <div className=" flex justify-center text-white text-xs h-8 w-6 md:h-auto md:w-auto items-center">
                 {chair.daChon === true ? (
                   <img src="/assets/chairTrue.png" alt="" />
                 ) : (
@@ -114,7 +115,7 @@ export default function MovieTickets() {
           );
         } else {
           return (
-            <div className="text-white bg-slate-600 rounded border flex justify-center items-center text-sm">
+            <div className="text-white bg-slate-600 rounded border flex justify-center items-center text-sm  h-8 w-6  md:h-auto md:w-auto">
               X
             </div>
           );
@@ -181,79 +182,70 @@ https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-05
         />
       </div>
 
-      <div className="grid grid-cols-2 mt-5 ">
+      <div className="grid grid-cols-1 xl:grid-cols-2 mt-5 ">
         <div className="mt-10">
-          <div className="grid grid-cols-10">
-            <div>
+          <div className="grid grid-cols-12  overflow-x-auto ">
+            <div className=" col-span-2">
               {" "}
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-1 mb-5 text-white flex items-center justify-center   md:h-14 md:w-20">
                 A
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-1 mb-5 text-white flex items-center justify-center   md:h-14 md:w-20">
                 B
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-1 mb-4 text-white flex items-center justify-center   md:h-14 md:w-20">
                 C
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-2 mb-4 text-white flex items-center justify-center   md:h-14 md:w-20">
                 D
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-2 mb-4 text-white flex items-center justify-center   md:h-14 md:w-20">
                 E
               </div>
-              <div className="mb-1 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-1 mb-4 text-white flex items-center justify-center   md:h-14 md:w-20">
                 F
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-3 mb-4 text-white flex items-center justify-center   md:h-14 md:w-20">
                 G
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-2 mb-3 text-white flex items-center justify-center   md:h-14 md:w-20">
                 H
               </div>
-              <div className="mb-1 text-white flex items-center justify-center  h-14 w-20">
+              <div className="md:mb-3 mb-4 text-white flex items-center justify-center   md:h-14 md:w-20">
                 I
               </div>
-              <div className="mb-2 text-white flex items-center justify-center  h-14 w-20">
+              <div className="  text-white flex items-center justify-center   md:h-14 md:w-20">
                 J
               </div>
             </div>
             <div
-              className="grid gap-2 col-span-9"
-              style={{
-                gridTemplateColumns: "repeat(16, minmax(0, 1fr)",
-                height: "620px",
-              }}
+              className="grid gap-2 col-span-10 grid-cols-16 w-[700px]   "
+              // style={{
+              //   height: "620px",
+              // }}
             >
               {renderChair()}
             </div>
           </div>
-          <div className="flex justify-center mt-3 ">
-            <div
-              className="flex justify-center  items-center"
-              style={{ height: "80px" }}
-            >
-              <div className="text-white bg-slate-600 rounded border flex justify-center items-center py-4 px-7 ">
-                <p style={{ width: "15px" }}>X</p>
+          <div className="flex space-x-6 items-center justify-center my-10">
+            {/* Đã Đặt (Booked) */}
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-gray-600 rounded-md flex items-center justify-center borderq ">
+                <span className="text-white text-lg">X</span>
               </div>
-              <p className="mx-5 text-center">Đã đặt</p>
+              <p className="text-center text-sm mt-1">Đã đặt</p>
             </div>
-            <div
-              className="flex justify-center  items-center"
-              style={{ height: "80px" }}
-            >
-              <div className="bg-red-500 flex justify-center border rounded  py-5 px-7">
-                <img width="16px" src="/assets/chairFalse.png" alt="" />
-              </div>
-              <p className="mx-5 text-center">Thường</p>
+
+            {/* Thường (Normal) */}
+            <div className="flex flex-col  items-center">
+              <div className="w-12 h-12 bg-red-500 rounded-md border"></div>
+              <p className="text-center text-sm mt-1">Thường</p>
             </div>
-            <div
-              className="flex justify-center  items-center"
-              style={{ height: "80px" }}
-            >
-              <div className=" flex justify-center border border-red-500  rounded  py-5 px-7">
-                <img width="16px" src="/assets/chairTrue.png" alt="" />
-              </div>
-              <p className="mx-5 text-center">Vip</p>
+
+            {/* Vip */}
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-black border border-red-500 rounded-md"></div>
+              <p className="text-center text-sm mt-1">Vip</p>
             </div>
           </div>
         </div>
@@ -261,8 +253,7 @@ https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-05
           <Card
             bordered={false}
             cover={coverTicket()}
-            className="m-auto  bg-red-500 border-2"
-            style={{ width: 600 }}
+            className="m-auto  bg-red-500 border-2 w-10/12"
           >
             <div className="flex justify-between">
               <p
@@ -307,7 +298,7 @@ https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-05
               >
                 Ngày giờ chiếu:
               </p>
-              <p>{ticket?.lichChieu}</p>
+              <p> {moment(ticket?.lichChieu).format("ddd, DD/MM - HH:mm")}</p>
             </div>
             <hr className="my-6 border-black" />
 

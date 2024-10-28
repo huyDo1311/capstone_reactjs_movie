@@ -6,6 +6,7 @@ import moment from "moment/moment";
 import { useDispatch } from "react-redux";
 import { setTicket } from "../../redux/userSlice";
 export default function DetailMovie() {
+  let navigate = useNavigate();
   let { id } = useParams();
 
   const takeDataTickets = (dataMa, dataLichChieu) => {
@@ -18,19 +19,14 @@ export default function DetailMovie() {
     return cinema?.heThongRapChieu?.map((item) => {
       return {
         key: item.maHeThongRap,
-        label: <img className="w-24" src={item.logo} alt="" />,
+        label: <img className="sm:w-24 w-10" src={item.logo} alt="" />,
         children: (
-          <div
-            style={{
-              height: "500px",
-            }}
-            className="overflow-y-scroll"
-          >
+          <div className="overflow-y-scroll h-96">
             {item.cumRapChieu.map((item2) => {
               return (
                 <div>
-                  <p className="text-xl ms-2">{item2.tenCumRap}</p>
-                  <div className="grid grid-cols-2 gap-2 my-5 mx-2">
+                  <p className="text-sm sm:text-xl ms-2">{item2.tenCumRap}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-2 my-5 mx-2">
                     {item2.lichChieuPhim.slice(0, 3).map((item3) => {
                       return (
                         <button
@@ -41,9 +37,9 @@ export default function DetailMovie() {
                             );
                           }}
                           key={item3.maLichChieu}
-                          className="bg-red-600 rounded hover:bg-red-700 transition"
+                          className="bg-red-600 rounded hover:bg-red-700 transition "
                         >
-                          <p className="text-center py-2">
+                          <p className="text-center py-2 text-xs sm:text-sm">
                             {moment(item3.ngayChieuGioChieu).format(
                               "ddd, DD/MM - HH:mm"
                             )}
@@ -64,43 +60,57 @@ export default function DetailMovie() {
     return (
       <div>
         <div>
-          <p className="text-4xl font-semibold text-red-600 my-5">
-            Nội dung phim
-          </p>
+          <div className="flex justify-between">
+            <p className="text-4xl font-semibold text-red-600 my-5">
+              Nội dung phim
+            </p>
+            <div className="flex items-center  relative w-20">
+              <i
+                onClick={() => {
+                  navigate("/home");
+                }}
+                class="fa fa-arrow-left text-red-600 animate-fade-slide  text-3xl absolute cursor-pointer"
+              ></i>
+            </div>
+          </div>
           <Divider
             style={{
               borderColor: "red",
             }}
           ></Divider>
-          <div className="flex">
-            <div className="flex">
-              <div
-                className="border-r-2 border-red-600"
-                style={{ width: "288px" }}
-              >
-                <img
-                  className="w-56 rounded"
-                  src={detailMovies?.hinhAnh}
-                  alt=""
-                />
+          <div className="block lg:flex">
+            <div className="block md:flex">
+              <div className="flex justify-center sm:border-r-2 sm:border-red-600 ">
+                <div className="sm:me-10   sm:w-56 w-72- 2xl:w-96 ">
+                  <img
+                    className=" rounded h-full m-auto"
+                    src={detailMovies?.hinhAnh}
+                    alt=""
+                  />
+                </div>
               </div>
-              <div className="ms-5">
-                <p className="font-bold text-xl ">{detailMovies?.tenPhim}</p>
-                <p className="text-xs w-96 my-5">
-                  {" "}
-                  <span className="text-red-600 text-sm"> Mô tả </span>:{" "}
-                  {detailMovies?.moTa}
+              <div className="sm:ms-5 mt-5 sm:mt-0 flex flex-col  items-center w-full">
+                <p className="font-bold text-xl text-center sm:text-left w-full ">
+                  {detailMovies?.tenPhim}
                 </p>
-                <div className="my-3">
+                <p className="text-xs w-full sm:my-5 my-2">
                   {" "}
-                  <span className="text-sm text-red-500">Lịch chiếu : </span>
+                  <span className="text-red-600 text-sm w-full ">
+                    {" "}
+                    Mô tả{" "}
+                  </span>:{" "}
+                  <span className="text-center">{detailMovies?.moTa}</span>
+                </p>
+                <div className="my-3 w-full ">
+                  {" "}
+                  <span className="text-sm text-red-500 ">Lịch chiếu : </span>
                   <span className="text-sm text-white">
                     {moment(detailMovies?.ngayChieuGioChieu).format(
                       "ddd, DD/MM - HH:mm"
                     )}
                   </span>
                 </div>
-                <div className="h-10 flex items-center">
+                <div className="h-10 flex items-center w-full">
                   <span className="text-sm text-red-500">Trailer : </span>
 
                   <a
@@ -111,7 +121,7 @@ export default function DetailMovie() {
                     <i class="fa fa-play text-red-500 text-2xl "></i>
                   </a>
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 w-full">
                   <button
                     onClick={handleScroll}
                     className="px-10 py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-700"
@@ -121,7 +131,7 @@ export default function DetailMovie() {
                 </div>
               </div>
             </div>
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full flex justify-center xl:items-center my-10 sm:my-0 sm:hidden lg:flex">
               <Progress
                 size={200}
                 className="text-white text-center"
@@ -144,21 +154,13 @@ export default function DetailMovie() {
     return cinema?.heThongRapChieu.length > 0 ? (
       <div
         ref={sectionRef}
-        className="border-4 rounded border-red-600 mt-16 mx-7 p-10"
+        className="border-4 rounded border-red-600 mx-0 p-5  sm:mt-16 sm:mx-7 sm:p-10  "
       >
         <div>
-          <p className="text-4xl text-center pb-7">
+          <p className="text-lg sm:text-4xl text-center pb-7 ">
             Các rạp phim hiện đang có suất chiếu{" "}
           </p>
-          <Tabs
-            className="ms-36 "
-            tabPosition="left"
-            items={itemsCinema()}
-            style={{
-              height: "500px",
-              width: "1000px",
-            }}
-          />
+          <Tabs className=" " tabPosition="left" items={itemsCinema()} />
         </div>
       </div>
     ) : (

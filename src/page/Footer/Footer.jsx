@@ -1,26 +1,17 @@
 import React from "react";
+import MediaQuery from "react-responsive";
+import FooterDesktop from "./FooterDesktop";
+import FooterMobile from "./FooterMobile";
 
 export default function Footer() {
   return (
     <div>
-      <div>
-        <div>
-          <p className="text-white">1</p>
-          <a href="#" className="text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              role="img"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              data-icon="FacebookStandard"
-              aria-hidden="true"
-              class="svg-icon svg-icon-facebook-logo"
-            ></svg>
-          </a>
-        </div>
-      </div>
+      <MediaQuery maxWidth={799}>
+        <FooterMobile />
+      </MediaQuery>
+      <MediaQuery minWidth={800} maxWidth={4000}>
+        <FooterDesktop />
+      </MediaQuery>
     </div>
   );
 }

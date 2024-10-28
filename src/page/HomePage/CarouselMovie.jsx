@@ -11,7 +11,7 @@ export default function CarouselMoive() {
         <div key={index} className="relative">
           <div key={item.maBanner}>
             <img
-              style={{ width: "100%", height: "600px", objectFit: "cover" }}
+              className="w-full h-[600px] 2xl:h-[1000px] !object-cover"
               src={item.hinhAnh}
               alt=""
             />
@@ -53,14 +53,12 @@ export default function CarouselMoive() {
         });
         setCarousel(newArr);
       })
-      .catch((err) => {
-        console.log(err, "loi");
-      });
+      .catch((err) => {});
   }, []);
 
   return (
     <div>
-      <div>
+      <div className="hidden md:!block ">
         <Carousel
           style={{ backgroundColor: "blue" }}
           arrows

@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import MainHeader from "../Header/MainHeader";
 
 export default function Layout({ content }) {
   return (
     <div>
-      <Header />
+      <MainHeader />
       {content}
       <Footer />
     </div>
