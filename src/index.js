@@ -7,15 +7,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd"; // Import ConfigProvider
 import userSlice from "./redux/userSlice";
-<<<<<<< Updated upstream
 import loadingSlice from './redux/loadingSlice';
 import quanLyNguoiDungSlice from './redux/reducers/quanLyNguoiDungSlice';
 import quanLyPhimSlice from './redux/reducers/quanLyPhimSlice';
 
-=======
-import loadingSlice from './redux/loadingSlice'
 import listMovieSlice from './redux/listMovieSlice'
->>>>>>> Stashed changes
 
 const theme = {
     components: {

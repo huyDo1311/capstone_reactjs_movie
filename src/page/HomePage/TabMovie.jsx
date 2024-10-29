@@ -24,11 +24,15 @@ export default function TabMovie() {
   };
   let ItemPhim = ({ phim }) => {
     return (
-      <div className=" lg:flex lg:space-x-3 lg:mt-5 ">
-        <img className="w-32 xl:w-64" src={phim.hinhAnh} alt="" />
+      <div className=" lg:flex lg:flex-row lg:space-x-3 lg:mt-5 flex flex-col items-center w-full">
+        <div className="w-32 2xl:w-64 flex items-center justify-center ">
+          <img src={phim.hinhAnh} alt="" />
+        </div>
         <div className="my-5  ">
-          <p className="lg:text-left text-center xl:text-xl">{phim.tenPhim}</p>
-          <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 gap-4 lg:mt-3">
+          <p className="lg:text-left text-center xl:text-xl text-xl mb-2 text-red-500">
+            {phim.tenPhim}
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-2 gap-4 lg:mt-3">
             {phim.lstLichChieuTheoPhim.slice(0, 6).map((item, index) => {
               return (
                 <button
@@ -40,7 +44,7 @@ export default function TabMovie() {
                     );
                   }}
                   key={index}
-                  className="text-white cursor-pointer rounded border-2 lg:p-2 xl:py-3 xl:px-9 hover:bg-red-600 transition active:bg-black hover:border-black"
+                  className="text-white cursor-pointer rounded border-2 p-1 lg:p-2 2xl:py-3 2xl:px-9 hover:bg-red-600 transition active:bg-black hover:border-black"
                 >
                   {moment(item.ngayChieuGioChieu).format("ddd, DD/MM ")}
                 </button>
@@ -57,7 +61,7 @@ export default function TabMovie() {
       return {
         key: index,
         label: (
-          <div className="text-left" style={{ width: "350px" }}>
+          <div className="text-left w-70">
             <p className="truncate text-sm lg:text-lg xl:text-xl">
               {item.tenCumRap}
             </p>
@@ -65,7 +69,7 @@ export default function TabMovie() {
           </div>
         ),
         children: (
-          <div style={{ height: "500px" }} className="overflow-y-scroll ">
+          <div className="overflow-y-scroll h-[700px] w-64  lg:w-80 xl:w-96">
             {item.danhSachPhim.map((phim) => {
               return <ItemPhim phim={phim} key={phim.maPhim} />;
             })}
@@ -84,7 +88,6 @@ export default function TabMovie() {
             defaultActiveKey="1"
             tabPosition="left"
             items={renderCumRap(item.lstCumRap)}
-            style={{ height: "500px" }}
           />
         ),
       };
@@ -92,18 +95,17 @@ export default function TabMovie() {
   };
 
   return (
-    <div className="md:!flex  flex-col items-center  hidden">
+    <div className="md:!flex  flex-col xl:items-center  hidden">
       <p className="text-3xl font-bold text-center my-4">
         Các cụm rạp chiếu phim
       </p>
 
-      <div className="m-10 ms-20 w-4/5 justify-center flex">
+      <div className="xl:m-10 xl:ms-20 w-4/5 xl:justify-center flex">
         <Tabs
           defaultActiveKey="1"
           tabPosition="left"
           items={renderLogo()}
-          className="w-4/5"
-          style={{ height: "500p  x" }}
+          className="w-4/5 h-4/5"
         />
       </div>
     </div>
