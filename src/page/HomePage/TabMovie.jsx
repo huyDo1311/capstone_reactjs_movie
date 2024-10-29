@@ -61,11 +61,11 @@ export default function TabMovie() {
       return {
         key: index,
         label: (
-          <div className="text-left w-70">
-            <p className="truncate text-sm lg:text-lg xl:text-xl">
+          <div className="text-left w-70 lg:w-64">
+            <p className="truncate text-sm lg:text-lg xl:text-xl ">
               {item.tenCumRap}
             </p>
-            <p className="truncate text-base text-gray-500">{item.diaChi}</p>
+            <p className="truncate text-base text-gray-500 ">{item.diaChi}</p>
           </div>
         ),
         children: (
