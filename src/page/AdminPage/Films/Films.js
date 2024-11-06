@@ -97,7 +97,7 @@ export default function Films() {
 
   const onSearchChange = (value) => {
     // Trim leading and trailing spaces, and replace multiple spaces with a single space
-    const trimmedValue = value.trim().replace(/\s+/g, '').toLowerCase();
+    const trimmedValue = value.trim();
 
     if (trimmedValue !== '') {
       // Clear previous timeout if it exists
